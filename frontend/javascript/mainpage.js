@@ -66,5 +66,10 @@ function populateNewsGrid(newsArray) {
     newsGrid.innerHTML = newsContent;
 }
 
+// Function to load news articles on page load
+function loadNewsArticles() {
+    populateNewsGrid(newsData);
+}
+
 // Populate the news grid when the page loads
-populateNewsGrid(newsData);
+window.onload = loadNewsArticles;

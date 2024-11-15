@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags and Title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Flowbite for Dropdowns -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.6/flowbite.min.js"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg p-4 flex flex-col items-center">
+        <div class="mx-auto">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="text-3xl font-bold text-gray-800 lg:absolute lg:left-10 outline px-2 py-1">News App</div>
+
+                <!-- Settings Dropdown -->
+                <button id="dropdownSettingsButton" data-dropdown-toggle="dropdownSettings" class="absolute right-10 mt-[10px] font-bold hover:bg-gray-200 transition-colors duration-300">
+                    <!-- Settings Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="lg:size-9 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                <div id="dropdownSettings" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 font-bold">
+                    <ul class="py-2 text-sm text-gray-700">
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Settings</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Log in</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Log out</a></li>
+                    </ul>
+                </div>
+
+                <!-- Dropdown Buttons and Search Bar -->
+                <div class="relative group">
+                    <div class="flex space-x-4 px-5 content-center font-bold">
+                        <!-- Tech Dropdown -->
+                        <button id="dropdownTechButton" data-dropdown-toggle="dropdownTech" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200">Tech</button>
+                        <div id="dropdownTech" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <ul class="py-2 text-sm text-gray-700">
+                                <li><a href="#" data-category="Tesla Inc AND automotive" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Tesla</a></li>
+                                <li><a href="#" data-category="Apple Inc AND technology" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Apple</a></li>
+                                <li><a href="#" data-category="Microsoft Corporation AND technology" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Microsoft</a></li>
+                                <li><a href="#" data-category="latest technology news OR technology news OR tech OR technology" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Surprise Me!</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Business Dropdown -->
+                        <button id="dropdownBusinessButton" data-dropdown-toggle="dropdownBusiness" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200">Business</button>
+                        <div id="dropdownBusiness" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <ul class="py-2 text-sm text-gray-700">
+                                <li><a href="#" data-category="Wall Street AND finance" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Wall Street</a></li>
+                                <li><a href="#" data-category="stock market AND trading" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Stocks</a></li>
+                                <li><a href="#" data-category="Bitcoin AND cryptocurrency" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Bitcoin</a></li>
+                                <li><a href="#" data-category="latest business news OR business news OR business" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Surprise Me!</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- World Dropdown -->
+                        <button id="dropdownWorldButton" data-dropdown-toggle="dropdownWorld" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200">World</button>
+                        <div id="dropdownWorld" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <ul class="py-2 text-sm text-gray-700">
+                                <li><a href="#" data-category="politics" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Politics</a></li>
+                                <li><a href="#" data-category="conflicts" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Conflicts</a></li>
+                                <li><a href="#" data-category="protests" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Protests</a></li>
+                                <li><a href="#" data-category="conflict OR war OR dispute" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Surprise Me!</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Search Bar with History Dropdown -->
+                        <div class="relative max-w-md mx-auto w-1/3 hidden sm:block">
+                            <form id="search-form">
+                                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <!-- Search Icon -->
+                                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="search" id="default-search" autocomplete="off" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search news..." required />
+                                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Go</button>
+                                </div>
+                            </form>
+
+                            <!-- Search History Dropdown -->
+                            <div id="search-history-dropdown" class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 hidden">
+                                <ul id="search-history-list" class="py-2 text-sm text-gray-700">
+                                    <!-- Search history items will be injected here -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End of Search Bar with History Dropdown -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- News Grid - Dynamic Section -->
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-10 w-50" id="news-grid">
+        <!-- News articles will be injected here by JavaScript -->
+    </div>
+
+    <!-- JavaScript Code -->
+    <script>
+        const apiKey = "pub_561798d50c4d30362bbcfac57921137a244a3"; // Replace with your actual API key
+
+        // Initialize search history array
+        let searchHistory = [];
+
+        // Load search history from localStorage
+        function loadSearchHistory() {
+            const history = localStorage.getItem('searchHistory');
+            if (history) {
+                searchHistory = JSON.parse(history);
+            } else {
+                searchHistory = [];
+            }
+        }
+
+        // Save search history to localStorage
+        function saveSearchHistory() {
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        }
+
+        // Update the search history dropdown
+        function updateSearchHistoryDropdown() {
+            const dropdown = document.getElementById('search-history-dropdown');
+            const list = document.getElementById('search-history-list');
+            list.innerHTML = '';
+
+            if (searchHistory.length === 0) {
+                const noHistoryItem = document.createElement('li');
+                noHistoryItem.className = 'px-4 py-2 text-gray-500';
+                noHistoryItem.textContent = 'No search history';
+                list.appendChild(noHistoryItem);
+            } else {
+                searchHistory.slice().reverse().forEach((query) => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'px-4 py-2 hover:bg-gray-200 cursor-pointer';
+                    listItem.textContent = query;
+                    listItem.addEventListener('click', () => {
+                        document.getElementById('default-search').value = query;
+                        dropdown.classList.add('hidden');
+                        fetchArticles(query);
+                    });
+                    list.appendChild(listItem);
+                });
+            }
+        }
+
+        // Show the search history dropdown
+        function showSearchHistoryDropdown() {
+            const dropdown = document.getElementById('search-history-dropdown');
+            updateSearchHistoryDropdown();
+            dropdown.classList.remove('hidden');
+        }
+
+        // Hide the search history dropdown
+        function hideSearchHistoryDropdown() {
+            const dropdown = document.getElementById('search-history-dropdown');
+            setTimeout(() => {
+                dropdown.classList.add('hidden');
+            }, 100); // Delay to allow click event on dropdown items
+        }
+
+        // Event listener for search input focus
+        document.getElementById('default-search').addEventListener('focus', showSearchHistoryDropdown);
+
+        // Event listener for search input blur
+        document.getElementById('default-search').addEventListener('blur', hideSearchHistoryDropdown);
+
+        // Event listener for search form submission
+        document.getElementById('search-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const searchQuery = document.getElementById('default-search').value.trim();
+
+            if (searchQuery) {
+                // Add to search history if it's not a duplicate
+                if (!searchHistory.includes(searchQuery)) {
+                    searchHistory.push(searchQuery);
+                    if (searchHistory.length > 10) {
+                        // Limit history to 10 items
+                        searchHistory.shift();
+                    }
+                    saveSearchHistory();
+                }
+                fetchArticles(searchQuery);
+                hideSearchHistoryDropdown();
+            }
+        });
+
+        /**
+         * Truncate text to a specified length and append ellipsis.
+         * @param {string} text - The text to truncate.
+         * @param {number} maxLength - The maximum allowed length.
+         * @returns {string} - Truncated text with ellipsis if necessary.
+         */
+        function truncateText(text, maxLength) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+
+        // Fetch articles based on category
+        async function fetchArticles(category) {
+            const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(category)}&language=en`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.status === "success" && data.results.length > 0) {
+                    const filteredArticles = filterAdultContent(data.results);
+                    const uniqueArticles = removeDuplicateArticles(filteredArticles);
+                    displayArticles(uniqueArticles);
+                } else {
+                    console.error("No articles found");
+                    document.getElementById("news-grid").innerHTML = `<p class="text-center text-red-500">No articles found for "${category}". Please try a different category.</p>`;
+                }
+            } catch (error) {
+                console.error("Error fetching the news:", error);
+                document.getElementById("news-grid").innerHTML = `<p class="text-center text-red-500">An error occurred while fetching the news.</p>`;
+            }
+        }
+
+        // Function to dynamically create a news article card
+        function createNewsCard(article) {
+            const title = article.title && article.title !== '[Removed]' ? truncateText(article.title, 100) : null;
+            const description = article.description && article.description !== '[Removed]' ? article.description : null;
+            const image_url = article.image_url && (article.image_url !== null || article.image_url !== '[Article Image]' ? article.image_url : '/test.png');
+            const link = article.link ? article.link : null;
+            const pubDate = article.pubDate ? new Date(article.pubDate).toLocaleDateString() : "Date not available";
+            const source_icon = article.source_icon ? article.source_icon : '/test.png'; // Fallback to a placeholder icon
+
+            // Skip this article if any of the key fields are missing (except image_url)
+            if (!title || !description || !link) {
+                return null;
+            }
+
+            // Use test.png if image_url or source_icon is not available
+            const finalImageUrl = image_url ? (image_url.includes('600px') ? image_url : resizeImage(image_url, 600)) : '/test.png';
+
+            return `
+            <div class="bg-white shadow-lg rounded-lg p-10 relative border-gray-200 hover:shadow-xl transition transform duration-100 hover:scale-105 transition transform duration-300 h-96 news-card fade-in" data-title="${title}" data-description="${description}">
+                <!-- Article Image or Source Icon -->
+                <img src="${finalImageUrl}" alt="Article Image" class="w-full h-48 mb-4 rounded-t-lg object-cover">
+                
+                <!-- Article Date -->
+                <p class="text-sm text-gray-500 absolute bottom-2 left-2">${pubDate}</p>
+                
+                <!-- Article Title -->
+                <h2 class="text-xl font-semibold text-gray-800 text-center absolute bottom-[40px] right-[10px] left-[10px]">${title}</h2>
+                
+                <!-- Read More Button -->
+                <a href="${link}" target="_blank" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 z-10">Read More</a>
+                
+                <!-- Hover Effect -->
+                <div class="absolute inset-0 bg-white bg-opacity-95 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                    <p class="text-gray-800 text-lg font-bold outline outline-offset-[5px] absolute top-10">AI Summary</p>
+                    <p class="text-gray-800 text-lg summary-text mt-4 px-7 text-center items-center animate-fade-out">[Loading summary...]</p>
+                </div>
+            </div>`;
+        }
+
+        // Function to resize image
+        function resizeImage(url, maxWidth) {
+            return `${url}?width=${maxWidth}`;
+        }
+
+        // Function to display multiple articles in the news grid
+        function displayArticles(articles) {
+            const newsGrid = document.getElementById("news-grid");
+            newsGrid.innerHTML = ''; // Clear any existing content
+            const uniqueArticles = getUniqueArticles(articles, 9); // Get 9 unique articles
+            uniqueArticles.forEach((article, index) => {
+                const newsCard = createNewsCard(article);
+                if (newsCard) {  // Only add the card if it's valid
+                    newsGrid.innerHTML += newsCard;
+                }
+            });
+
+            // Add hover event listeners to fetch summaries
+            document.querySelectorAll('.news-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`; // Add delay for each card
+                card.addEventListener('mouseenter', async (event) => {
+                    const title = event.currentTarget.getAttribute('data-title');
+                    const description = event.currentTarget.getAttribute('data-description');
+                    const summaryTextElement = event.currentTarget.querySelector('.summary-text');
+
+                    // Check if summary is already fetched
+                    if (summaryTextElement.getAttribute('data-fetched') === 'true') {
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch('http://localhost:3000/summarize', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ text: `${title}. ${description}` })
+                        });
+
+                        const data = await response.json();
+                        if (data.success) {
+                            summaryTextElement.textContent = data.summary;
+                            summaryTextElement.setAttribute('data-fetched', 'true'); // Mark as fetched
+                            summaryTextElement.classList.remove('animate-fade-out');
+                            summaryTextElement.classList.add('animate-fade-in');
+                        } else {
+                            summaryTextElement.textContent = 'Failed to fetch summary.';
+                        }
+                    } catch (error) {
+                        summaryTextElement.textContent = 'Error fetching summary.';
+                    }
+                });
+            });
+        }
+
+        // Function to get a specified number of unique articles
+        function getUniqueArticles(articles, count) {
+            const shuffled = articles.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // Function to remove duplicate articles based on title and link
+        function removeDuplicateArticles(articles) {
+            const seen = new Set();
+            return articles.filter(article => {
+                const identifier = `${article.title}-${article.link}`;
+                if (seen.has(identifier)) {
+                    return false;
+                } else {
+                    seen.add(identifier);
+                    return true;
+                }
+            });
+        }
+
+        // Function to filter out adult content
+        function filterAdultContent(articles) {
+            const adultKeywords = ['nude', 'sexy', 'summary'];
+            return articles.filter(article => {
+                const title = article.title ? article.title.toLowerCase() : '';
+                const description = article.description ? article.description.toLowerCase() : '';
+                return !adultKeywords.some(keyword => title.includes(keyword) || description.includes(keyword));
+            });
+        }
+
+        // Event listener for dropdown items
+        document.querySelectorAll('[data-category]').forEach(item => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                const category = event.target.getAttribute('data-category');
+                fetchArticles(category);
+            });
+        });
+
+        // Load search history on page load
+        loadSearchHistory();
+
+        // Fetch and display a random set of articles when the page loads
+        fetchArticles('microsoft OR apple OR tesla OR conflict OR war OR dispute OR bitcoin OR stocks OR wallstreet OR protests');
+    </script>
+
+    <!-- Styles -->
+    <style>
+        /* Fade-in animation for news cards */
+        .news-card {
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: slide-in 0.5s forwards;
+        }
+
+        @keyframes slide-in {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Fade-in and fade-out animations for summaries */
+        @keyframes fade-out {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .animate-fade-out {
+            animation: fade-out 2s infinite;
+        }
+        .animate-fade-in {
+            animation: fade-in 2s forwards;
+        }
+
+        /* Styles for search history dropdown */
+        #search-history-dropdown {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</body>
+</html>

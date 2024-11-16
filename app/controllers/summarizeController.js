@@ -1,4 +1,4 @@
-// controllers/summarizeController.js
+// app/controllers/summarizeController.js
 const OpenAI = require('openai');
 
 const openai = new OpenAI({

@@ -1,0 +1,35 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<%- include('categoryNavBar') %>
+<div class="jumbotron text-center">
+    <h1>Create an entry</h1>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <% if (errors.length > 0) { %>
+            <div class="alert alert-danger">
+                <% for (error of errors) { %>
+                    <%= error %><br>
+                <% } %>
+            </div>
+        <% } %>
+        
+        <form action="/categories/<%= categorySlug %>/processCreateEntry" method="POST">
+            
+            <div class="form-group">
+                <label>Label</label>
+                <input type="text" name="label" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label>API Query</label>
+                <input type="text" name="apiQuery" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg">Create</button>
+            </div>
+        </form>
+    </div>
+</div>	

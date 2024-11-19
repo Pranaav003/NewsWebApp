@@ -5,7 +5,11 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-exports.summarizeText = async (req, res) => {
+module.exports = {
+    summarizeText: summarizeText
+}
+
+async function summarizeText(req, res) {
     try {
         const { text } = req.body;
         const response = await openai.chat.completions.create({

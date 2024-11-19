@@ -1,0 +1,35 @@
+/* Fade-in animation for news cards */
+.news-card {
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slide-in 0.5s forwards;
+}
+
+@keyframes slide-in {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade-in and fade-out animations for summaries */
+@keyframes fade-out {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.animate-fade-out {
+    animation: fade-out 2s infinite;
+}
+.animate-fade-in {
+    animation: fade-in 2s forwards;
+}
+
+/* Styles for search history dropdown */
+#search-history-dropdown {
+    max-height: 200px;
+    overflow-y: auto;
+}

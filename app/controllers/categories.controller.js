@@ -61,10 +61,21 @@ async function processEditCategory(req, res) {
 
 async function seedCategories(req, res) {
     const categories = [
-        { name: 'Example', entries: [
-            {label: "entry", apiQuery: "hello world"},
-            {label: "entry2", apiQuery: "hello world2"}
+        { name: 'Tech', entries: [
+            {label: "Apple", apiQuery: "apple iphone ipad mac"},
+            {label: "Tesla", apiQuery: "tesla car"}
         ] },
+        { name: 'Business', entries: [
+            {label: "Wall Street", apiQuery: "Wall Street AND finance"},
+            {label: "Stocks", apiQuery: "stock market AND trading"},
+            {label: "Bitcoin", apiQuery: "Bitcoin AND cryptocurrency"}
+        ] },
+        { name: 'World', entries: [
+            {label: "Politics", apiQuery: "politics"},
+            {label: "Conflicts", apiQuery: "conflicts"},
+            {label: "Protests", apiQuery: "protests"},
+            {label: "suprise Me!", apiQuery: "conflict OR war OR dispute"}
+        ] }
     ]
 
     try {

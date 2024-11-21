@@ -25,38 +25,18 @@
             <!-- Dropdown Buttons and Search Bar -->
             <div class="relative group">
                 <div class="flex space-x-4 px-5 content-center font-bold">
-                    <!-- Tech Dropdown -->
-                    <button id="dropdownTechButton" data-dropdown-toggle="dropdownTech" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200">Tech</button>
-                    <div id="dropdownTech" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                        <ul class="py-2 text-sm text-gray-700">
-                            <li><a href="#" data-category="Tesla Inc AND automotive" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Tesla</a></li>
-                            <li><a href="#" data-category="Apple Inc AND technology" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Apple</a></li>
-                            <li><a href="#" data-category="Microsoft Corporation AND technology" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Microsoft</a></li>
-                            <li><a href="#" data-category="latest technology news OR technology news OR tech OR technology" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Surprise Me!</a></li>
-                        </ul>
-                    </div>
 
-                    <!-- Business Dropdown -->
-                    <button id="dropdownBusinessButton" data-dropdown-toggle="dropdownBusiness" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200">Business</button>
-                    <div id="dropdownBusiness" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                        <ul class="py-2 text-sm text-gray-700">
-                            <li><a href="#" data-category="Wall Street AND finance" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Wall Street</a></li>
-                            <li><a href="#" data-category="stock market AND trading" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Stocks</a></li>
-                            <li><a href="#" data-category="Bitcoin AND cryptocurrency" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Bitcoin</a></li>
-                            <li><a href="#" data-category="latest business news OR business news OR business" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Surprise Me!</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- World Dropdown -->
-                    <button id="dropdownWorldButton" data-dropdown-toggle="dropdownWorld" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200">World</button>
-                    <div id="dropdownWorld" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                        <ul class="py-2 text-sm text-gray-700">
-                            <li><a href="#" data-category="politics" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Politics</a></li>
-                            <li><a href="#" data-category="conflicts" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Conflicts</a></li>
-                            <li><a href="#" data-category="protests" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Protests</a></li>
-                            <li><a href="#" data-category="conflict OR war OR dispute" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Surprise Me!</a></li>
-                        </ul>
-                    </div>
+                    <!--Generating dropddown button categories with data-->
+                    <% for (var category of categories) { %>
+                        <button id="dropdownButton<%= category.slug%>" data-dropdown-toggle="dropdown<%= category.slug%>" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200"><%= category.name%></button>
+                        <div id="dropdown<%= category.slug%>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <ul class="py-2 text-sm text-gray-700">
+                                <% for (var entry of category.entries) { %>
+                                    <li><a href="#" data-category="<%= entry.apiQuery%>" class="block px-4 py-2 hover:bg-gray-900 hover:text-white"><%= entry.label%></a></li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    <% } %>
 
                     <!-- Search Bar with History Dropdown -->
                     <div class="relative max-w-md mx-auto w-1/3 hidden sm:block">

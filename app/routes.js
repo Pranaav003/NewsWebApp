@@ -2,21 +2,30 @@
 const express = require('express'),
     router = express.Router(),
     mainController = require('./controllers/main.controller'),
-    summarizeController = require('../app/controllers/summarizeController'),
+    summarizeController = require('./controllers/summarizeController'),
     categoriesController = require('./controllers/categories.controller'),
-    entriesController = require('./controllers/entries.controller')
+    entriesController = require('./controllers/entries.controller'),
+    middleware = require('./middleware')
 
 module.exports = router;
 
 //router.post('/', summarizeController.summarizeText);
 router.post('/summarize', summarizeController.summarizeText);
 
-//Main route
+//Main routes
 router.get('/', mainController.showHomePage)
+router.get('/showLogin', mainController.showLogin)
+router.get('/showSignUp', mainController.showSignUp)
+router.post('/login', mainController.login)
+router.post('/signUp', mainController.signUp)
+router.get('/logOut', mainController.logOut)
+router.post('/search', mainController.search)
+router.get('/clearSearches', mainController.clearSearches)
+router.get('/deleteAccount', mainController.deleteAccount)
 
 //Category Modification
 router.get('/categories', categoriesController.showCategories)
-router.get('/categories/seed', categoriesController.seedCategories)
+router.get('/categories/seed', middleware.seedCategories, categoriesController.showCategories)
 router.get('/categories/showCreate', categoriesController.showCreate)
 router.get('/categories/:slug/view', categoriesController.viewCategory)
 router.get('/categories/:slug/delete', categoriesController.deleteCategory)

@@ -4,7 +4,6 @@ const { check, validationResult } = require('express-validator')
 module.exports = {
     deleteAll: deleteAll,
     showCategories: showCategories,
-    seedCategories: seedCategories,
     showCreate: showCreate,
     processCreateCategory: processCreateCategory,
     deleteCategory: deleteCategory,
@@ -59,47 +58,10 @@ async function processEditCategory(req, res) {
     }
 }
 
-async function seedCategories(req, res) {
-    const categories = [
-        { name: 'Tech', entries: [
-            {label: "Apple", apiQuery: "apple iphone ipad mac"},
-            {label: "Tesla", apiQuery: "tesla car"}
-        ] },
-        { name: 'Business', entries: [
-            {label: "Wall Street", apiQuery: "Wall Street AND finance"},
-            {label: "Stocks", apiQuery: "stock market AND trading"},
-            {label: "Bitcoin", apiQuery: "Bitcoin AND cryptocurrency"}
-        ] },
-        { name: 'World', entries: [
-            {label: "Politics", apiQuery: "politics"},
-            {label: "Conflicts", apiQuery: "conflicts"},
-            {label: "Protests", apiQuery: "protests"},
-            {label: "suprise Me!", apiQuery: "conflict OR war OR dispute"}
-        ] }
-    ]
-
-    try {
-        await Category.deleteMany({})
-        for (category of categories) {
-            let newCategory = new Category(category)
-            await newCategory.save()
-        }
-
-        //Doesn't redirect if the request came from the home page loading
-        if(res !== 'ignore') {
-            req.flash('success', 'Categories seeded!')
-            res.redirect('/categories')
-        }
-    } catch (err) {
-        console.log(err)
-        res.status(500).send('Error seeding categories.');
-    }
-}
-
 async function showCategories(req, res) {
     // get all categories
     try {
-        categories = await Category.find({})
+        categories = await Category.find({ user: req.session.user.username })
 
         // return a view with data
         res.render('pages/categories', {
@@ -132,6 +94,7 @@ async function processCreateCategory(req, res) {
     // create a new category
     const category = new Category({
         name: req.body.name,
+        user: req.session.user.username,
         entries: []
     })
 
@@ -159,7 +122,6 @@ async function viewCategory(req, res) {
     }
 }
 
-     
 async function deleteCategory(req, res) {
     try {
         await Category.deleteOne({ slug: req.params.slug })

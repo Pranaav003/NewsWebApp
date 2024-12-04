@@ -6,14 +6,44 @@ const apiKey = "pub_561798d50c4d30362bbcfac57921137a244a3"; // Replace with your
 * @param {number} maxLength - The maximum allowed length.
 * @returns {string} - Truncated text with ellipsis if necessary.
 */
+
+// Show the search history dropdown
+function showSearchHistoryDropdown() {
+    const dropdown = document.getElementById('search-history-dropdown');
+    dropdown.classList.remove('hidden');
+}
+
+// Hide the search history dropdown
+function hideSearchHistoryDropdown() {
+    const dropdown = document.getElementById('search-history-dropdown');
+    setTimeout(() => {
+        dropdown.classList.add('hidden');
+    }, 100); // Delay to allow click event on dropdown items
+}
+
+// Event listener for search input focus
+document.getElementById('default-search').addEventListener('focus', showSearchHistoryDropdown);
+
+// Event listener for search input blur
+document.getElementById('default-search').addEventListener('blur', hideSearchHistoryDropdown);
+
+// Event listener for dropdown items
+document.querySelectorAll('[data-entry]').forEach(item => {
+    item.addEventListener('click', (event) => {
+        event.preventDefault();
+        const query = event.target.getAttribute('data-entry');
+        fetchArticles(query);
+    });
+});
+
 function truncateText(text, maxLength) {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
 }
 
-// Fetch articles based on category
-async function fetchArticles(category) {
-    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(category)}&language=en`;
+// Fetch articles based on query
+async function fetchArticles(query) {
+    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(query)}&language=en`;
     
     try {
         const response = await fetch(url);
@@ -157,5 +187,9 @@ function filterAdultContent(articles) {
     });
 }
 
-// Fetch and display a random set of articles when the page loads
-fetchArticles('microsoft OR apple OR tesla OR conflict OR war OR dispute OR bitcoin OR stocks OR wallstreet OR protests');
+//Fetch articles using query from search
+if(query !== '') {
+    fetchArticles(query)
+} else { // Fetch and display a random set of articles when the page loads
+    fetchArticles('microsoft OR apple OR tesla OR conflict OR war OR dispute OR bitcoin OR stocks OR wallstreet OR protests');
+}

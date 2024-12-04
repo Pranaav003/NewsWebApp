@@ -1,7 +1,98 @@
-<div>
-    <%- include('navbar') %>
-</div>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Flowbite for Dropdowns -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.6/flowbite.min.js"></script>
+
+<!-- Making rendered items available to scripts. May display error but still works -->
+<script> <!--AI Assistance-->
+    const searchHistory = <%- JSON.stringify(searchHistory) %>;
+    const query = <%- JSON.stringify(query) %>;
+</script>
+
+<nav class="bg-white shadow-lg p-4 flex flex-col items-center">
+    <div class="mx-auto">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <div class="text-3xl font-bold text-gray-800 lg:absolute lg:left-10 outline px-2 py-1">News App</div>
+
+            <!-- Settings Dropdown -->
+            <button id="dropdownSettingsButton" data-dropdown-toggle="dropdownSettings" class="absolute right-10 mt-[10px] font-bold hover:bg-gray-200 transition-colors duration-300">
+                <!-- Settings Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="lg:size-9 w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+            <div id="dropdownSettings" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 font-bold">
+                <ul class="py-2 text-sm text-gray-700">
+                    <li><a href="/categories" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Settings</a></li>
+                    <li><a href="/showLogin" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Log in</a></li>
+                    <li><a href="/showSignUp" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Sign Up</a></li>
+                    <li><a href="/logOut" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Log out</a></li>
+                    <li><a href="/clearSearches" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Clear Searches</a></li>
+                    <li><a href="/deleteAccount" class="block px-4 py-2 hover:bg-gray-900 hover:text-white">Delete Account</a></li>
+                </ul>
+            </div>
+
+            <!-- Dropdown Buttons and Search Bar -->
+            <div class="relative group">
+                <div class="flex space-x-4 px-5 content-center font-bold">
+
+                    <!--Generating dropddown button categories with data-->
+                    <% for (var category of categories) { %>
+                        <button id="dropdownButton<%= category.slug%>" data-dropdown-toggle="dropdown<%= category.slug%>" class="lg:px-[65px] px-5 py-2 bg-gray-300 rounded hover:scale-105 transition transform duration-300 hover:bg-gray-200"><%= category.name%></button>
+                        <div id="dropdown<%= category.slug%>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <ul class="py-2 text-sm text-gray-700">
+                                <% for (var entry of category.entries) { %>
+                                    <li><a href="#" data-entry="<%= entry.apiQuery%>" class="block px-4 py-2 hover:bg-gray-900 hover:text-white"><%= entry.label%></a></li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    <% } %>
+
+                    <!-- Search Bar with History Dropdown -->
+                    <div class="relative max-w-md mx-auto w-1/3 hidden sm:block">
+                        <form id="search-form" action="/search" method="POST">
+                            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <!-- Search Icon -->
+                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                    </svg>
+                                </div>
+                                <input name="search" type="search" id="default-search" autocomplete="off" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search news..." required />
+                                <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Go</button>
+                            </div>
+                        </form>
+
+                        <!-- Search History Dropdown -->
+                        <div id="search-history-dropdown" class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 hidden">
+                            <ul id="search-history-list" class="py-2 text-sm text-gray-700">
+                                <!-- Search history items will be injected here -->
+                                <% if (searchHistory.length === 0) { %>
+                                    <li class="px-4 py-2 text-gray-500">No search history</li>
+                                <% } else { %>
+                                    <% searchHistory.slice().reverse().forEach((search) => { %>
+                                        <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer" onclick="fetchArticles('<%= search.query %>')">
+                                            <%= search.query %>
+                                        </li>
+                                    <% }) %>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End of Search Bar with History Dropdown -->
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
 
 <div>
-    <%- include('newsCards') %>
+    <!-- News Grid - Dynamic Section -->
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-10 w-50" id="news-grid">
+        <!-- News articles will be injected here by JavaScript -->
+    </div>
 </div>
+
+<link rel="stylesheet" href="/css/newsCardStyle.css">
+<script src="/javascript/newsScript.js" type="text/javascript"></script>

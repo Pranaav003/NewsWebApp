@@ -2,35 +2,34 @@ const mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 // create a schema
-const categorySchema = new Schema({
-    name: String,
-    user: String,
+const searchSchema = new Schema({
+    user: {
+        type: String,
+        required: true
+    },
     slug: {
         type: String,
         unique: true
     },
-    entries: [{
-        label: String,
-        apiQuery: String
-    }]
+    query: {
+        type: String,
+        required: true
+    },
 })
 
-// middleware section
-// make sure that the slug is created from the name
-categorySchema.pre('save', function(next) {
-    this.slug = slugify(`${this.user}-${this.name}`);
+searchSchema.pre('save', function(next) {
+    this.slug = slugify(`${this.user}-${this.query}`);
     next()
 })
 
-categorySchema.index({ slug: 1, user: 1 }, { unique: true });
+searchSchema.index({ slug: 1, user: 1 }, { unique: true });
 
 // create the model
-const categoryModel = mongoose.model('category', categorySchema)
+const searchModel = mongoose.model('search', searchSchema)
 
 // export the model
-module.exports = categoryModel
+module.exports = searchModel
 
-// function to slugify a name
 function slugify(text) {
     return text.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -

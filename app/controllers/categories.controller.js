@@ -80,20 +80,16 @@ async function seedCategories(req, res) {
 
     try {
         await Category.deleteMany({})
+
         for (category of categories) {
             let newCategory = new Category(category)
             await newCategory.save()
         }
-
-        //Doesn't redirect if the request came from the home page loading
-        if(res !== 'ignore') {
-            req.flash('success', 'Categories seeded!')
-            res.redirect('/categories')
-        }
     } catch (err) {
         console.log(err)
-        res.status(500).send('Error seeding categories.');
     }
+
+    res.redirect('/categories')
 }
 
 async function showCategories(req, res) {
@@ -108,7 +104,7 @@ async function showCategories(req, res) {
         })
     } catch {
         res.status(404)
-        res.send('Categories not found!')
+        res.send('categories not found')
     }
 }
 
@@ -126,7 +122,7 @@ async function processCreateCategory(req, res) {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         req.flash('errors', errors.errors.map(err => err.msg))
-        return res.redirect('/categories/showCreate')
+        return res.redirect('/categories/create')
     }
 
     // create a new category

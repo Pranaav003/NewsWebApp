@@ -71,7 +71,7 @@ async function processEditEntry(req, res) {
     try {
         await Category.updateOne({ slug: req.params.slug, "entries._id": req.params._id },  
             { $set: { "entries.$.label": req.body.label, "entries.$.apiQuery": req.body.apiQuery } })
-        req.flash('success', 'Successfuly modified entry!')
+        req.flash('success', 'Successfully modified entry!')
         res.redirect('/categories/' + req.params.slug + '/view', )
     } catch {
         res.status(500)

@@ -1,15 +1,22 @@
-<link rel="stylesheet" href="/css/navBarStyle.css">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-<div>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="/categories/showCreate">Create a category</a></li>
-            <li class="nav-item"><a class="nav-link" href="/categories">View Categories</a></li>
-            <li class="nav-item"><a class="nav-link" href="/categories/seed">Seed categories</a></li>
-            <li class="nav-item"><a class="nav-link" href="/categories/deleteAll">Purge</a></li>
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        </ul>
+<div class="container mx-auto p-4">
+    <h1 class="text-center text-4xl font-bold my-6 text-gray-800">Category Navigation</h1>
+    
+    <nav class="bg-gray-800 p-4 rounded-lg shadow-lg text-center">
+        <div class="flex justify-center items-center">
+            <ul class="flex space-x-6">
+                <li><a class="text-white hover:text-yellow-400 transition duration-300" href="/categories/showCreate">Create a category</a></li>
+                <li><a class="text-white hover:text-yellow-400 transition duration-300" href="/categories">View Categories</a></li>
+                <li><a class="text-white hover:text-yellow-400 transition duration-300" href="/categories/seed">Seed categories</a></li>
+                <li><a class="text-white hover:text-yellow-400 transition duration-300" href="/categories/deleteAll">Purge</a></li>
+                <li><a class="text-white hover:text-yellow-400 transition duration-300" href="/">Home</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="bg-gray-700 p-6 rounded-lg shadow-lg mb-6 text-center mt-6">
+        <p class="text-yellow-400 text-lg font-semibold">TIP!</p>
+        <p class="text-gray-300 text-md px-3 mt-2">When typing in your <strong>entry queries</strong>, add the keywords <strong class="text-yellow-400">AND/OR</strong> to make your categories more personalized!</p>
     </div>
-</nav>
 </div>

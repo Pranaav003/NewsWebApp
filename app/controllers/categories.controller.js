@@ -70,7 +70,7 @@ async function showCategories(req, res) {
         })
     } catch {
         res.status(404)
-        res.send('Categories not found!')
+        res.send('categories not found')
     }
 }
 
@@ -88,7 +88,7 @@ async function processCreateCategory(req, res) {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         req.flash('errors', errors.errors.map(err => err.msg))
-        return res.redirect('/categories/showCreate')
+        return res.redirect('/categories/create')
     }
 
     // create a new category
@@ -101,7 +101,7 @@ async function processCreateCategory(req, res) {
     // save
     try {
         await category.save()
-        req.flash('success', 'Successfuly created category!')
+        req.flash('success', 'Successfully created category!')
         res.redirect('/categories')
     } catch {
         res.status(500)

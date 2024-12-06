@@ -1,4 +1,4 @@
 # NewsWebApp
 
-Start the server by running node app.js
-Open the server in your browser by going to localhost:3000
+Start the server by running: node app.js
+Navigate to the page using the localhost address.

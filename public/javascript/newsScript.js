@@ -70,7 +70,7 @@ function createNewsCard(article) {
     const image_url = article.image_url && (article.image_url !== null || article.image_url !== '[Article Image]' ? article.image_url : '/test.png');
     const link = article.link ? article.link : null;
     const pubDate = article.pubDate ? new Date(article.pubDate).toLocaleDateString() : "Date not available";
-    const source_icon = article.source_icon ? article.source_icon : '/test.png'; // Fallback to a placeholder icon
+    const source_icon = article.source_icon ? article.source_icon : '/public/test.png'; // Fallback to a placeholder icon
 
     // Skip this article if any of the key fields are missing (except image_url)
     if (!title || !description || !link) {

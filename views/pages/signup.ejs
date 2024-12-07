@@ -7,21 +7,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4 mt-3">
-        <h1>Create New Account</h1>
+        <h1>News App Signup</h1>
         
             <form class="mt-3" action="/signUp" id="signup" method="POST" onsubmit="return validateAccount(this);">
                 <div class="mb-3">
                 <label for="username" class="form-label">User Name</label>
                 <input name="username" type="text" class="form-control" id="name">
-                <div id="error1" class="form-text" style="color:red" hidden="true">Your name is required.</div>
+                <div id="error1" class="form-text" style="color:red"></div>
                 <br>
                 <label for="password" class="form-label">Password</label>
                 <input name="password" id="password" type="password" class="form-control">
-                <div id="error2" class="form-text" style="color:red" hidden="true">A password is required.</div>
+                <div id="error2" class="form-text" style="color:red"></div>
                 <br>
                 <label for="confirm class="form-label">Confirm password</label>
                 <input name="confirm" id="confirm" type="password" class="form-control">
-                <div id="error3" class="form-text" style="color:red" hidden="true">The passwords you entered don't match.</div>
+                <div id="error3" class="form-text" style="color:red"></div>
                 </div>
                 <button type="submit" class="btn btn-primary">Create Account</button>
                 <a href="/showLogin" class="btn btn-primary">Log In</a>

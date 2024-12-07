@@ -127,7 +127,7 @@ function showLogin(req, res) {
 }
 
 function showSignUp(req, res) {
-    res.render('pages/signUp', {
+    res.render('pages/signup', {
         errors: req.flash('errors')
     })
 }

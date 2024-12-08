@@ -5,32 +5,36 @@
     <h1 class="text-2xl font-bold">Entries</h1>
 </div>
 
-<% if (success.length > 0) { %>
-    <div class="alert alert-success"><%= success %></div>
-<% } %>
 
-<table class="table table-bordered table-hover table-striped">
-    <thead>
-        <th>Label</th>
-        <th>Query</th>
-        <th><a href="/categories/<%= category.slug %>/showCreateEntry" class="btn btn-sm btn-primary">New</a></th>
-    </thead>
-    <tbody>
+<div style="width: auto; min-width: 30%; max-width: 60%; margin: 0 auto">
 
-        <% for (var entry of category.entries) { %>
-            <tr>
-                <td>
-                    <%= entry.label %>
-                </td>
-                <td>
-                    <%= entry.apiQuery %>
-                </td>
-                <td>
-                    <a href="/categories/<%= category.slug %>/<%= entry._id%>/showEdit" class="btn btn-sm btn-primary">Edit</a>
-                    <a href="/categories/<%= category.slug %>/<%= entry._id%>/delete" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
-        <% } %>
+    <% if (success.length > 0) { %>
+        <div class="alert alert-success"><%= success %></div>
+    <% } %>
 
-    </tbody>
-</table>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <th>Label</th>
+            <th>Query</th>
+            <th><a href="/categories/<%= category.slug %>/showCreateEntry" class="btn btn-sm btn-primary">New</a></th>
+        </thead>
+        <tbody>
+
+            <% for (var entry of category.entries) { %>
+                <tr>
+                    <td>
+                        <%= entry.label %>
+                    </td>
+                    <td>
+                        <%= entry.apiQuery %>
+                    </td>
+                    <td>
+                        <a href="/categories/<%= category.slug %>/<%= entry._id%>/showEdit" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/categories/<%= category.slug %>/<%= entry._id%>/delete" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            <% } %>
+
+        </tbody>
+    </table>
+</div>

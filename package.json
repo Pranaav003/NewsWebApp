@@ -21,7 +21,8 @@
     "express-session": "1.18.1",
     "express-validator": "^7.2.0",
     "mongoose": "8.8.2",
-    "openai": "^4.72.0"
+    "openai": "^4.72.0",
+    "typewriter-effect": "^2.21.0"
   },
   "keywords": []
 }

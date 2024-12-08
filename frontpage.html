@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to NewsApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <style>
+      /* Custom class for fading the bottom of an image */
+      .fade-bottom {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .fade-bottom::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100">
+    <!-- Logo -->
+    <div class="absolute top-8 left-8 text-white">
+      <h1 class="text-3xl font-bold border-4 border-white p-4">NewsApp</h1>
+    </div>
+    <!-- Fullscreen Hero Section -->
+    <div
+      class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white"
+    >
+      <div class="mb-20 text-center">
+        <div class="py-5">
+          <div class="relative w-[500px] mx-auto fade-bottom">
+            <img
+              src="public/main.png"
+              alt="NewsApp Logo"
+              class="w-[500px] h-auto mx-auto rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+
+        <h1 class="text-6xl font-bold mb-4">Welcome to NewsApp</h1>
+
+        <!-- Typewriter Effect Section -->
+        <h2 id="typewriter" class="mb-10 text-2xl"></h2>
+
+        <p class="mb-[-20px] text-lg">
+          Your gateway to the latest and greatest news articles, personalized just for you.
+        </p>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="text-center">
+        <a
+          href="/main"
+          class="px-8 py-4 bg-white text-blue-600 font-semibold rounded-full shadow-lg hover:bg-gray-200 hover:scale-110 transition duration-300 transform hover:shadow-2xl"
+        >
+          Enter the App
+        </a>
+        <h1 class="text-4xl font-bold mt-10 text-center">Features</h1>
+      </div>
+
+      <!-- Square Cards -->
+      <div class="flex flex-wrap justify-center gap-10 mt-10 mb-20">
+        <div
+          class="bg-white bg-opacity-50 text-gray-800 rounded-lg shadow-lg p-5 w-50 h-[300px] backdrop-blur-sm text-center"
+        >
+          <h3 class="text-xl font-semibold mb-4">AI Summaries</h3>
+          <img
+            src="public/summarize.png"
+            alt="Customizable Categories"
+            class="w-40 h-auto rounded-lg mb-4 mx-auto"
+          />
+        </div>
+        <div
+          class="bg-white bg-opacity-50 text-gray-800 rounded-lg shadow-lg p-5 w-50 h-[300px] backdrop-blur-sm text-center"
+        >
+          <h3 class="text-xl font-semibold mb-4">Customizable Categories</h3>
+          <img
+            src="public/category.png"
+            alt="Customizable Categories"
+            class="w-40 h-auto rounded-lg mb-4 mx-auto"
+          />
+        </div>
+        <div
+          class="bg-white bg-opacity-50 text-gray-800 rounded-lg shadow-lg p-5 w-50 h-[300px] backdrop-blur-sm text-center"
+        >
+          <h3 class="text-xl font-semibold mb-4">Functional Search</h3>
+          <img
+            src="public/search.png"
+            alt="Customizable Categories"
+            class="w-40 h-auto rounded-lg mb-4 mx-auto"
+          />
+        </div>
+        <div
+          class="bg-white bg-opacity-50 text-gray-800 rounded-lg shadow-lg p-5 w-50 h-[300px] backdrop-blur-sm text-center"
+        >
+          <h3 class="text-xl font-semibold mb-4">DB Enabled Login</h3>
+          <img
+            src="public/login.png"
+            alt="Customizable Categories"
+            class="w-40 h-auto rounded-lg mb-4 mx-auto"
+          />
+        </div>
+      </div>
+
+      <!-- Decorative Elements -->
+      <div class="mb-10"></div>
+        <p class="text-md opacity-75 pb-10">Stay informed. Stay updated. Use NewsApp.</p>
+      </div>
+    </div>
+
+    <!-- Typewriter Effect Script -->
+    <script>
+      const typewriter = new Typewriter('#typewriter', {
+        loop: true,
+        delay: 75,
+      });
+
+      typewriter
+        .typeString('Your <u class="font-semibold">unbiased</u>, fully customizable news source')
+        .pauseFor(1500)
+        .deleteAll()
+        .typeString('Your <u class="font-semibold">AI-powered</u> news assistant')
+        .pauseFor(1500)
+        .deleteAll()
+        .typeString('Fully <u class="font-semibold">customizable</u> news categories')
+        .pauseFor(1500)
+        .start();
+    </script>
+  </body>
+</html>

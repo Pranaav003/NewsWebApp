@@ -33,7 +33,7 @@ async function processCreateEntry(req, res) {
 
     try {
         await Category.updateOne({ slug: req.params.slug }, { $push: { entries: entry } } )
-        req.flash('success', 'Successfuly created entry!')
+        req.flash('success', 'Successfully created entry!')
         res.redirect('/categories/' + req.params.slug + '/view', )
     } catch {
         res.status(500)

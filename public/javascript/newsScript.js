@@ -1,4 +1,4 @@
-const apiKey = "pub_561798d50c4d30362bbcfac57921137a244a3"; // Replace with your actual API key
+const apiKey = "pub_56179a4b5b18c78b12e1a276ab220aa3c99f1"; // Replace with your actual API key
 
 /**
 * Truncate text to a specified length and append ellipsis.
@@ -17,8 +17,10 @@ function showSearchHistoryDropdown() {
 function hideSearchHistoryDropdown() {
     const dropdown = document.getElementById('search-history-dropdown');
     setTimeout(() => {
-        dropdown.classList.add('hidden');
-    }, 100); // Delay to allow click event on dropdown items
+        if (!dropdown.matches(':hover')) {
+            dropdown.classList.add('hidden');
+        }
+    }, 300); // Increased delay to allow click event on dropdown items
 }
 
 // Event listener for search input focus

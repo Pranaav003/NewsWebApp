@@ -15,19 +15,22 @@ module.exports = {
     async seedCategories(req, res, next) {
         const categories = [
             { name: 'Tech', user: req.session.user.username, entries: [
-                {label: "Apple", apiQuery: "apple iphone ipad mac"},
-                {label: "Tesla", apiQuery: "tesla car"}
+            {label: "Apple", apiQuery: "apple AND iphone"},
+            {label: "Tesla", apiQuery: "tesla AND car"},
+            {label: "Google", apiQuery: "google AND android"},
+            {label: "Microsoft", apiQuery: "microsoft AND windows"}
             ] },
             { name: 'Business', user: req.session.user.username, entries: [
-                {label: "Wall Street", apiQuery: "Wall Street AND finance"},
-                {label: "Stocks", apiQuery: "stock market AND trading"},
-                {label: "Bitcoin", apiQuery: "Bitcoin AND cryptocurrency"}
+            {label: "Wall Street", apiQuery: "Wall Street AND finance"},
+            {label: "Stocks", apiQuery: "stock market AND trading"},
+            {label: "Bitcoin", apiQuery: "Bitcoin AND cryptocurrency"},
+            {label: "Economy", apiQuery: "global economy AND stock market"}
             ] },
             { name: 'World', user: req.session.user.username, entries: [
-                {label: "Politics", apiQuery: "politics"},
-                {label: "Conflicts", apiQuery: "conflicts"},
-                {label: "Protests", apiQuery: "protests"},
-                {label: "suprise Me!", apiQuery: "conflict OR war OR dispute"}
+            {label: "Politics", apiQuery: "politics AND government"},
+            {label: "Conflicts", apiQuery: "conflicts AND war"},
+            {label: "Protests", apiQuery: "protests AND demonstrations"},
+            {label: "Climate Change", apiQuery: "climate change AND environment"}
             ] }
         ]
     

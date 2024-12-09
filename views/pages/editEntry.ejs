@@ -4,8 +4,7 @@
     <h1 class="text-xl font-bold">Editing <u><%= entry.label %></u></h1>
 </div>
 
-<div class="flex justify-center">
-    <div class="w-full max-w-md">
+<div style="max-width: 60%; min-width: 30%; margin: 0 auto;">
         
         <% if (errors.length > 0) { %>
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -30,8 +29,5 @@
             <div class="flex items-center justify-between">
                 <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
             </div>
-            
         </form>
-        
-    </div>
 </div>

@@ -61,7 +61,7 @@ async function search(req, res) {
 
 async function logOut(req, res) {
     req.session.user = undefined
-    res.redirect('/showLogin')
+    res.redirect('/frontpage.html')
 }
 
 async function login(req, res) {

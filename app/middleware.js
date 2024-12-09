@@ -6,9 +6,7 @@ module.exports = {
         if (req.session && req.session.user) {
             return next()
         } else {
-            res.render('pages/login', {
-                errors: req.flash('errors')
-            })
+            res.redirect('/frontpage.html')
         }
     },
 

@@ -1,35 +1,40 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <%- include('categoryNavBar') %>
-<div class="jumbotron text-center">
-    <h1>Create an entry</h1>
+
+<!-- Centered header -->
+<div class="text-center py-8">
+    <h1 class="text-xl font-bold">Create an Entry</h1>
 </div>
 
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+<!-- Form container -->
+<div class="flex justify-center">
+    <div class="w-full max-w-md">
+        
         <% if (errors.length > 0) { %>
-            <div class="alert alert-danger">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <% for (error of errors) { %>
-                    <%= error %><br>
+                    <span class="block sm:inline"><%= error %></span><br>
                 <% } %>
             </div>
         <% } %>
         
-        <form action="/categories/<%= categorySlug %>/processCreateEntry" method="POST">
+        <form action="/categories/<%= categorySlug %>/processCreateEntry" method="POST" class="shadow-md rounded px-8 pt-6 pb-8 mb-4">
             
-            <div class="form-group">
-                <label>Label</label>
-                <input type="text" name="label" class="form-control">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Label</label>
+                <input type="text" name="label" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
             
-            <div class="form-group">
-                <label>API Query</label>
-                <input type="text" name="apiQuery" class="form-control">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">API Query</label>
+                <input type="text" name="apiQuery" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
             
-            <div class="form-group">
-                <button type="submit" class="btn btn-success btn-lg">Create</button>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create</button>
             </div>
+            
         </form>
+        
     </div>
-</div>	
+</div>

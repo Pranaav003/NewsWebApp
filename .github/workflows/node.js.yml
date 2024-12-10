@@ -41,5 +41,6 @@ jobs:
 
       - name: Run tests
         env:
-          MONGO_URI: mongodb://root:example@localhost:27017/test?authSource=admin
+          SECRET: HAHA
+          DB_URI: mongodb://root:example@localhost:27017/test?authSource=admin
         run: npm test

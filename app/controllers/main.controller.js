@@ -72,11 +72,11 @@ async function login(req, res) {
         
         //Checking that the username exists in DB
         if (user === null || user === undefined) {
-            return res.redirect('/showLogin')
+            return res.status(400).end()
         }
         
         if (password !== user.password) {
-            return res.redirect('/showLogin')
+            return res.status(400).end()
         }
 
         req.session.user = { id: user.id, username: user.username }

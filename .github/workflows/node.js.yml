@@ -17,43 +17,29 @@ jobs:
 
     services:
       mongodb:
-        image: mongo:6.0
+        image: mongo:latest
+        options: --health-cmd="mongod --version" --health-interval=10s --health-timeout=5s --health-retries=3
         ports:
           - 27017:27017
-        options: --quiet --bind_ip 0.0.0.0
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build the app
-      run: npm run build --if-present
+      - name: Build the app
+        run: npm run build --if-present
 
-    - name: Wait for MongoDB to start
-      run: |
-        for i in {1..30}; do
-          if nc -z localhost 27017; then
-            echo "MongoDB is ready";
-            break;
-          fi
-          echo "Waiting for MongoDB...";
-          sleep 1;
-        done
-        if ! nc -z localhost 27017; then
-          echo "MongoDB failed to start";
-          exit 1;
-        fi
-
-    - name: Run tests
-      env:
-        SECRET: HAHA
-        DB_URI: "mongodb://127.0.0.1"
-        PORT: 80
-      run: npm test
+      - name: Run tests
+        env:
+          MONGO_URI: mongodb://root:example@localhost:27017/test?authSource=admin
+        run: npm test

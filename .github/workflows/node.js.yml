@@ -22,8 +22,8 @@ jobs:
         ports:
           - 27017:27017
         env:
-          MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
-          MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
 
     steps:
       - uses: actions/checkout@v4
@@ -42,5 +42,5 @@ jobs:
       - name: Run tests
         env:
           SECRET: HAHA
-          DB_URI: mongodb://${{ secrets.MONGO_INITDB_ROOT_USERNAME }}:${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}@localhost:27017/test?authSource=admin
+          DB_URI: mongodb://root:example@localhost:27017/test?authSource=admin
         run: npm test

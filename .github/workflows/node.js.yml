@@ -41,6 +41,7 @@ jobs:
 
       - name: Run tests
         env:
+          PORT: 3000
           OPENAI_API_KEY: "example"
           SECRET: HAHA
           DB_URI: mongodb://root:example@localhost:27017/test?authSource=admin
